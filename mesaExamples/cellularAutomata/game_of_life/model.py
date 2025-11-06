@@ -25,24 +25,16 @@ class ConwaysGameOfLife(Model):
         # Place a cell at each location, with some initialized to
         # ALIVE and some to DEAD.
         for i, cell in enumerate(self.grid.all_cells):
-            if (i + 1) % 50 == 0:
-                Cell(
-                    self,
-                    cell,
-                    init_state=(
-                        Cell.ALIVE
-                        if self.random.random() < initial_fraction_alive
-                        else Cell.DEAD
-                    ),
-                )
-            else:
-                Cell(
-                    self,
-                    cell,
-                    init_state=(
-                        Cell.DEAD
-                    ),
-                )
+            Cell(
+                self,
+                cell,
+                init_state=(
+                    Cell.ALIVE
+                    if self.random.random() < initial_fraction_alive
+                    else Cell.DEAD
+                ),
+            )
+
 
         self.running = True
 

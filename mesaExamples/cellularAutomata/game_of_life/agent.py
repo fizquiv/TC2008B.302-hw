@@ -46,23 +46,22 @@ class Cell(FixedAgent):
         self._next_state = self.state
         print(self.pos[1])
 
-        if self.pos[1] == row:
-            if neighbor_info[2] == 1 and neighbor_info[4] == 1 and neighbor_info[7] == 1:
-                self._next_state = self.DEAD
-            elif neighbor_info[2] == 1 and neighbor_info[4] == 1 and neighbor_info[7] == 0:
-                self._next_state = self.ALIVE
-            elif neighbor_info[2] == 1 and neighbor_info[4] == 0 and neighbor_info[7] == 1:
-                self._next_state = self.DEAD
-            elif neighbor_info[2] == 1 and neighbor_info[4] == 0 and neighbor_info[7] == 0:
-                self._next_state = self.ALIVE
-            elif neighbor_info[2] == 0 and neighbor_info[4] == 1 and neighbor_info[7] == 1:
-                self._next_state = self.ALIVE
-            elif neighbor_info[2] == 0 and neighbor_info[4] == 1 and neighbor_info[7] == 0:
-                self._next_state = self.DEAD
-            elif neighbor_info[2] == 0 and neighbor_info[4] == 0 and neighbor_info[7] == 1:
-                self._next_state = self.ALIVE
-            elif neighbor_info[2] == 0 and neighbor_info[4] == 0 and neighbor_info[7] == 0:
-                self._next_state = self.DEAD
+        if neighbor_info[2] == 1 and neighbor_info[4] == 1 and neighbor_info[7] == 1:
+            self._next_state = self.DEAD
+        elif neighbor_info[2] == 1 and neighbor_info[4] == 1 and neighbor_info[7] == 0:
+            self._next_state = self.ALIVE
+        elif neighbor_info[2] == 1 and neighbor_info[4] == 0 and neighbor_info[7] == 1:
+            self._next_state = self.DEAD
+        elif neighbor_info[2] == 1 and neighbor_info[4] == 0 and neighbor_info[7] == 0:
+            self._next_state = self.ALIVE
+        elif neighbor_info[2] == 0 and neighbor_info[4] == 1 and neighbor_info[7] == 1:
+            self._next_state = self.ALIVE
+        elif neighbor_info[2] == 0 and neighbor_info[4] == 1 and neighbor_info[7] == 0:
+            self._next_state = self.DEAD
+        elif neighbor_info[2] == 0 and neighbor_info[4] == 0 and neighbor_info[7] == 1:
+            self._next_state = self.ALIVE
+        elif neighbor_info[2] == 0 and neighbor_info[4] == 0 and neighbor_info[7] == 0:
+            self._next_state = self.DEAD
 
 
     def assume_state(self):
