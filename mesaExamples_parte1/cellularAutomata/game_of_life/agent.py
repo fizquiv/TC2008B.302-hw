@@ -32,6 +32,7 @@ class Cell(FixedAgent):
         self._next_state = None
         self.updated = -1
 
+    # We use row parameter to modify only the desired row
     def determine_state(self, row):
         """Compute if the cell will be dead or alive at the next tick.  This is
         based on the number of alive or dead neighbors.  The state is not
@@ -41,11 +42,11 @@ class Cell(FixedAgent):
         """
         # Get the neighbors and apply the rules on whether to be alive or dead
         # at the next tick.
-        neighbor_info = [(n.state) for n in self.neighbors]
+        neighbor_info = [(n.state) for n in self.neighbors] # make a list of the neighboring cell states
         # Assume nextState is unchanged, unless changed below.
         self._next_state = self.state
-        print(self.pos[1])
 
+        # hash map that will be used to determine state
         neighborStates ={
         '111' : 0,
         '110' : 1,
@@ -59,7 +60,7 @@ class Cell(FixedAgent):
 
         # Update only if the row matches the y position of the cell
         if self.pos[1] == row:
-            key = f"{neighbor_info[2]}{neighbor_info[4]}{neighbor_info[7]}"
+            key = f"{neighbor_info[2]}{neighbor_info[4]}{neighbor_info[7]}" # make a string to be used for the hash map key
             self._next_state = neighborStates[key]
 
 

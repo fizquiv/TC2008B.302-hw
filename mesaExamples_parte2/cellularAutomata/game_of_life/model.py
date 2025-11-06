@@ -23,7 +23,7 @@ class ConwaysGameOfLife(Model):
         self.grid = OrthogonalMooreGrid((width, height), capacity=1, torus=True)
 
         # Place a cell at each location, with some initialized to
-        # ALIVE and some to DEAD.
+        # Random between alive and dead for all cells
         for i, cell in enumerate(self.grid.all_cells):
             Cell(
                 self,
@@ -44,6 +44,6 @@ class ConwaysGameOfLife(Model):
         - First, all cells assume their next state (whether they will be dead or alive)
         - Then, all cells change state to their next state.
         """
-        self.count -= 1
-        self.agents.do("determine_state", self.count)
+        self.count -= 1 # Subtract 1 from the counter to move to lower row
+        self.agents.do("determine_state", self.count) # We pass the counter as an argument to update only the desired row
         self.agents.do("assume_state")

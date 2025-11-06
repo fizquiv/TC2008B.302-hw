@@ -6,10 +6,11 @@ from .agent import Cell
 class ConwaysGameOfLife(Model):
     """Represents the 2-dimensional array of cells in Conway's Game of Life."""
 
-    def __init__(self, width=50, height=50, initial_fraction_alive=0.2, seed=None):
+    def __init__(self, width=50, height=5, initial_fraction_alive=0.2, seed=None):
         """Create a new playing area of (width, height) cells."""
         super().__init__(seed=seed)
-        self.count = 49
+        self.count = height - 1
+        self.height = height
 
         """Grid where cells are connected to their 8 neighbors.
 
@@ -23,9 +24,9 @@ class ConwaysGameOfLife(Model):
         self.grid = OrthogonalMooreGrid((width, height), capacity=1, torus=True)
 
         # Place a cell at each location, with some initialized to
-        # ALIVE and some to DEAD.
+        
         for i, cell in enumerate(self.grid.all_cells):
-            if (i + 1) % 50 == 0:
+            if (i + 1) % self.height == 0: # Set only the first row to random between dead and alive
                 Cell(
                     self,
                     cell,
@@ -52,6 +53,7 @@ class ConwaysGameOfLife(Model):
         - First, all cells assume their next state (whether they will be dead or alive)
         - Then, all cells change state to their next state.
         """
-        self.count -= 1
-        self.agents.do("determine_state", self.count)
+        
+        self.count -= 1 # Subtract 1 from the counter to move to lower row
+        self.agents.do("determine_state", self.count) # We pass the counter as an argument to update only the desired row
         self.agents.do("assume_state")
